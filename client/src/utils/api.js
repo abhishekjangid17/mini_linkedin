@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 const API = axios.create({
-  baseURL: 'https://mini-linkedin-ipjq.onrender.com', // or your Render backend URL
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api',
 })
+
 
 // Automatically attach token if available
 API.interceptors.request.use((req) => {
