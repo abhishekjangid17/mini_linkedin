@@ -22,24 +22,30 @@ function Profile() {
     fetchProfile()
   }, [id])
 
-  if (!user) return <p>Loading...</p>
+  if (!user) return <p className="text-center text-gray-500 mt-10">Loading...</p>
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h2>{user.name}'s Profile</h2>
-      <p><strong>Email:</strong> {user.email}</p>
-      <p><strong>Bio:</strong> {user.bio || 'No bio available'}</p>
+    <div className="max-w-2xl mx-auto p-6">
+      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h2 className="text-2xl font-bold mb-2">{user.name}'s Profile</h2>
+        <p className="text-gray-600"><strong>Email:</strong> {user.email}</p>
+        <p className="text-gray-600"><strong>Bio:</strong> {user.bio || 'No bio available'}</p>
+      </div>
 
-      <h3>Posts</h3>
+      <h3 className="text-xl font-semibold mb-4">Posts</h3>
       {posts.length === 0 ? (
-        <p>No posts yet.</p>
+        <p className="text-gray-500 text-center">No posts yet.</p>
       ) : (
-        posts.map((post) => (
-          <div key={post._id} style={{ borderBottom: '1px solid #ddd', padding: '0.5rem 0' }}>
-            <p>{post.content}</p>
-            <small>{new Date(post.createdAt).toLocaleString()}</small>
-          </div>
-        ))
+        <div className="space-y-4">
+          {posts.map((post) => (
+            <div key={post._id} className="bg-white shadow-md rounded-lg p-4">
+              <p className="text-gray-800">{post.content}</p>
+              <small className="text-gray-500 block mt-2">
+                {new Date(post.createdAt).toLocaleString()}
+              </small>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   )
